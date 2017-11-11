@@ -1,0 +1,10 @@
+{application, memhash, [
+    {description, "Memory handling for hashs and references"},
+    {vsn, git},
+    {registered, []},
+    {applications, [
+        kernel,
+        stdlib
+    ]},
+    {env, []}
+]}.

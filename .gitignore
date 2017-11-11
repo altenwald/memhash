@@ -1,0 +1,10 @@
+.eunit/
+ebin/
+deps/
+ephp
+cobertura.xml
+_build/
+request_ets
+.build_date
+tmp
+php.ini
