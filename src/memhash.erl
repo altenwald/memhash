@@ -134,6 +134,8 @@ remove(Ref, Key) ->
 destroy(Ref) when is_reference(Ref) ->
     destroy(Ref, []).
 
+-spec destroy(memhash:memhash(), [memhash:memhash()]) -> ok.
+%% @private
 destroy(Ref, Refs) ->
     case lists:member(Ref, Refs) of
         true ->
