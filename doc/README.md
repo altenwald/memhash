@@ -17,6 +17,6 @@ This project helps handling the memory for other implementations that requires s
 
 
 <table width="100%" border="0" summary="list of modules">
-<tr><td><a href="http://github.com/altenwald/memhash/blob/master/doc/memhash.md" class="module">memhash</a></td></tr>
-<tr><td><a href="http://github.com/altenwald/memhash/blob/master/doc/memhash_data.md" class="module">memhash_data</a></td></tr></table>
+<tr><td><a href="memhash.md" class="module">memhash</a></td></tr>
+<tr><td><a href="memhash_data.md" class="module">memhash_data</a></td></tr></table>
 
