@@ -2,7 +2,7 @@ language: erlang
 install:
 - "sudo pip install codecov"
 script:
-- "./rebar3 do eunit, cover, dialyzer"
+- "./rebar3 do xref, eunit, cover, dialyzer"
 - "./covertool -cover _build/test/cover/eunit.coverdata -appname memhash -output cobertura.xml > /dev/null"
 after_success: "codecov"
 otp_release:
