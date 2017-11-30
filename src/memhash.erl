@@ -21,7 +21,12 @@ new() ->
     erlang:put({index, Ref}, []),
     Ref.
 
--spec get(memhash(), Key :: term()) -> term().
+-type reason() :: atom().
+
+-spec get(memhash(), Key :: term()) ->
+      undefined |
+      {value,  memhash_data:table_id(), term()} |
+      {error, reason()}.
 get(Ref, Key) ->
     case erlang:get({index, Ref}) of
         undefined ->

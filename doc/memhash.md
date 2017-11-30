@@ -17,6 +17,16 @@
 
 __abstract datatype__: `memhash()`
 
+
+
+
+### <a name="type-reason">reason()</a> ###
+
+
+<pre><code>
+reason() = atom()
+</code></pre>
+
 <a name="index"></a>
 
 ## Function Index ##
@@ -43,7 +53,7 @@ destroy(Ref::<a href="#type-memhash">memhash()</a>) -&gt; ok
 ### get/2 ###
 
 <pre><code>
-get(Ref::<a href="#type-memhash">memhash()</a>, Key::term()) -&gt; term()
+get(Ref::<a href="#type-memhash">memhash()</a>, Key::term()) -&gt; undefined | {value, <a href="memhash_data.md#type-table_id">memhash_data:table_id()</a>, term()} | {error, <a href="#type-reason">reason()</a>}
 </code></pre>
 <br />
 
