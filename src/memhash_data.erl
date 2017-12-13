@@ -2,8 +2,10 @@
 -author('manuel@altenwald.com').
 -compile([warnings_as_errors, {no_auto_import, [get/1]}]).
 
--export([get/1,
-         get_with_links/1,
+-export([start_link/0,
+         stop/0,
+         get/1,
+         get_links/1,
          add/1,
          set/2,
          incr/1,
@@ -13,49 +15,65 @@
 
 -export_type([table_id/0]).
 
+start_link() ->
+    Tid = ets:new(?MODULE, [set, public]),
+    erlang:put(?MODULE, Tid),
+    ok.
+
+stop() ->
+    Tid = erlang:get(?MODULE),
+    erlang:erase(?MODULE),
+    ets:delete(Tid),
+    ok.
+
 -spec seq_id() -> table_id().
 seq_id() ->
-    case erlang:get({seq, data}) of
-        undefined ->
-            erlang:put({seq, data}, 1),
-            0;
-        Num ->
-            erlang:put({seq, data}, Num + 1),
-            Num
-    end.
+    Tid = erlang:get(?MODULE),
+    ets:update_counter(Tid, idx, 1, {idx, 0}).
 
 -spec get(table_id()) -> term().
 get(ID) ->
-    {Value, _Links} = get_with_links(ID),
-    Value.
+    Tid = erlang:get(?MODULE),
+    case ets:lookup(Tid, {data, ID}) of
+        [] -> undefined;
+        [{{data, ID}, Data}] -> Data
+    end.
 
--spec get_with_links(table_id()) -> {term(), pos_integer()}.
-get_with_links(ID) ->
-    erlang:get({data, ID}).
+-spec get_links(table_id()) -> pos_integer().
+get_links(ID) ->
+    Tid = erlang:get(?MODULE),
+    case ets:lookup(Tid, {links, ID}) of
+        [] -> undefined;
+        [{{links, ID}, Data}] -> Data
+    end.
 
 -spec add(Data :: term()) -> table_id().
 add(Data) ->
     ID = seq_id(),
-    erlang:put({data, ID}, {Data, 1}),
+    Tid = erlang:get(?MODULE),
+    ets:insert(Tid, [{{data, ID}, Data}, {{links, ID}, 1}]),
     ID.
 
 -spec set(table_id(), Data :: term()) -> ok.
 set(ID, Data) ->
-    {_, Links} = get_with_links(ID),
-    erlang:put({data, ID}, {Data, Links}),
+    Tid = erlang:get(?MODULE),
+    ets:insert(Tid, {{data, ID}, Data}),
     ok.
 
 -spec incr(table_id()) -> ok.
 incr(ID) ->
-    {Value, Links} = erlang:get({data, ID}),
-    erlang:put({data, ID}, {Value, Links + 1}),
+    Tid = erlang:get(?MODULE),
+    ets:update_counter(Tid, {links, ID}, 1, {idx, 0}),
     ok.
 
 -spec decr(table_id()) -> ok.
 decr(ID) ->
-    {Value, Links} = erlang:get({data, ID}),
-    if 
-        Links =:= 1 -> erlang:erase({data, ID});
-        true -> erlang:put({data, ID}, {Value, Links - 1})
-    end,
-    ok.
+    Tid = erlang:get(?MODULE),
+    case ets:update_counter(Tid, {links, ID}, -1, {idx, 0}) of
+        N when N =< 0 ->
+            ets:delete(Tid, {links, ID}),
+            ets:delete(Tid, {data, ID}),
+            ok;
+        _ ->
+            ok
+    end.
