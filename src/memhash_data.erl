@@ -29,7 +29,7 @@ stop() ->
 -spec seq_id() -> table_id().
 seq_id() ->
     Tid = erlang:get(?MODULE),
-    ets:update_counter(Tid, idx, 1, {idx, 0}).
+    update_counter(Tid, idx, 1, {idx, 0}).
 
 -spec get(table_id()) -> term().
 get(ID) ->
@@ -63,13 +63,13 @@ set(ID, Data) ->
 -spec incr(table_id()) -> ok.
 incr(ID) ->
     Tid = erlang:get(?MODULE),
-    ets:update_counter(Tid, {links, ID}, 1, {idx, 0}),
+    update_counter(Tid, {links, ID}, 1, {idx, 0}),
     ok.
 
 -spec decr(table_id()) -> ok.
 decr(ID) ->
     Tid = erlang:get(?MODULE),
-    case ets:update_counter(Tid, {links, ID}, -1, {idx, 0}) of
+    case update_counter(Tid, {links, ID}, -1, {idx, 0}) of
         N when N =< 0 ->
             ets:delete(Tid, {links, ID}),
             ets:delete(Tid, {data, ID}),
@@ -77,3 +77,15 @@ decr(ID) ->
         _ ->
             ok
     end.
+
+-ifdef(NO_ETS_UPDATE_DEFAULT).
+update_counter(Tid, Key, Incr, Default) ->
+    try
+        ets:update_counter(Tid, Key, Incr)
+    catch error:badarg ->
+        ets:insert(Tid, Default)
+    end.
+-else.
+update_counter(Tid, Key, Incr, Default) ->
+    ets:update_counter(Tid, Key, Incr, Default).
+-endif.
