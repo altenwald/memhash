@@ -9,6 +9,7 @@ simple_test() ->
     ?assertEqual(undefined, memhash:get(M, <<"name">>)),
     ?assertEqual(ok, memhash:set_val(M, <<"name">>, <<"Manuel">>)),
     ?assertMatch({value, _Number, <<"Manuel">>}, memhash:get(M, <<"name">>)),
+    ?assertMatch([<<"name">>], memhash:keys(M)),
     ?assertMatch(ok, memhash:remove(M, <<"name">>)),
     ?assertEqual(undefined, memhash:get(M, <<"name">>)),
     ?assertEqual(ok, memhash:destroy(M)),
