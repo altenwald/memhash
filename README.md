@@ -2,13 +2,14 @@
 
 # memhash #
 
-Copyright (c) 2017 Altenwald Solutions, S.L.
+Copyright (c) 2017-2018 Altenwald Solutions, S.L.
 
 __Authors:__ "Manuel Rubio" ([`manuel@altenwald.com`](mailto:manuel@altenwald.com)).
 
 [![Build Status](https://img.shields.io/travis/altenwald/memhash/master.svg)](https://travis-ci.org/altenwald/memhash)
 [![Codecov](https://codecov.io/gh/altenwald/memhash/branch/master/graph/badge.svg)](https://codecov.io/gh/altenwald/memhash)
 [![License: LGPL 2.1](https://img.shields.io/github/license/altenwald/memhash.svg)](https://raw.githubusercontent.com/altenwald/memhash/master/COPYING)
+[![Hex](https://img.shields.io/hexpm/v/memhash.svg)](https://hex.pm/packages/memhash)
 
 This project helps handling the memory for other implementations that requires some properties like a heterogeneous array with the use of references and keep all of them clean.
 

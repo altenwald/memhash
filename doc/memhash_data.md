@@ -22,7 +22,7 @@ __abstract datatype__: `table_id()`
 ## Function Index ##
 
 
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#add-1">add/1</a></td><td></td></tr><tr><td valign="top"><a href="#decr-1">decr/1</a></td><td></td></tr><tr><td valign="top"><a href="#get-1">get/1</a></td><td></td></tr><tr><td valign="top"><a href="#get_with_links-1">get_with_links/1</a></td><td></td></tr><tr><td valign="top"><a href="#incr-1">incr/1</a></td><td></td></tr><tr><td valign="top"><a href="#set-2">set/2</a></td><td></td></tr></table>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#add-1">add/1</a></td><td></td></tr><tr><td valign="top"><a href="#decr-1">decr/1</a></td><td></td></tr><tr><td valign="top"><a href="#get-1">get/1</a></td><td></td></tr><tr><td valign="top"><a href="#get_links-1">get_links/1</a></td><td></td></tr><tr><td valign="top"><a href="#incr-1">incr/1</a></td><td></td></tr><tr><td valign="top"><a href="#set-2">set/2</a></td><td></td></tr><tr><td valign="top"><a href="#start_link-0">start_link/0</a></td><td></td></tr><tr><td valign="top"><a href="#stop-0">stop/0</a></td><td></td></tr></table>
 
 
 <a name="functions"></a>
@@ -56,12 +56,12 @@ get(ID::<a href="#type-table_id">table_id()</a>) -&gt; term()
 </code></pre>
 <br />
 
-<a name="get_with_links-1"></a>
+<a name="get_links-1"></a>
 
-### get_with_links/1 ###
+### get_links/1 ###
 
 <pre><code>
-get_with_links(ID::<a href="#type-table_id">table_id()</a>) -&gt; {term(), pos_integer()}
+get_links(ID::<a href="#type-table_id">table_id()</a>) -&gt; pos_integer()
 </code></pre>
 <br />
 
@@ -82,4 +82,16 @@ incr(ID::<a href="#type-table_id">table_id()</a>) -&gt; ok
 set(ID::<a href="#type-table_id">table_id()</a>, Data::term()) -&gt; ok
 </code></pre>
 <br />
+
+<a name="start_link-0"></a>
+
+### start_link/0 ###
+
+`start_link() -> any()`
+
+<a name="stop-0"></a>
+
+### stop/0 ###
+
+`stop() -> any()`
 

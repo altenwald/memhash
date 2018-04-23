@@ -17,16 +17,6 @@
 
 __abstract datatype__: `memhash()`
 
-
-
-
-### <a name="type-reason">reason()</a> ###
-
-
-<pre><code>
-reason() = atom()
-</code></pre>
-
 <a name="index"></a>
 
 ## Function Index ##
@@ -44,7 +34,7 @@ reason() = atom()
 ### destroy/1 ###
 
 <pre><code>
-destroy(Ref::<a href="#type-memhash">memhash()</a>) -&gt; ok
+destroy(Mem::<a href="#type-memhash">memhash()</a>) -&gt; ok
 </code></pre>
 <br />
 
@@ -53,7 +43,7 @@ destroy(Ref::<a href="#type-memhash">memhash()</a>) -&gt; ok
 ### get/2 ###
 
 <pre><code>
-get(Ref::<a href="#type-memhash">memhash()</a>, Key::term()) -&gt; undefined | {value, <a href="memhash_data.md#type-table_id">memhash_data:table_id()</a>, term()} | {error, <a href="#type-reason">reason()</a>}
+get(X1::<a href="#type-memhash">memhash()</a>, Key::term()) -&gt; undefined | {value, <a href="memhash_data.md#type-table_id">memhash_data:table_id()</a>, term()} | {error, enomemhash}
 </code></pre>
 <br />
 
@@ -62,7 +52,7 @@ get(Ref::<a href="#type-memhash">memhash()</a>, Key::term()) -&gt; undefined | {
 ### get_all/1 ###
 
 <pre><code>
-get_all(Ref::<a href="#type-memhash">memhash()</a>) -&gt; [term()]
+get_all(Mem::<a href="#type-memhash">memhash()</a>) -&gt; [{term(), term()}]
 </code></pre>
 <br />
 
@@ -71,7 +61,7 @@ get_all(Ref::<a href="#type-memhash">memhash()</a>) -&gt; [term()]
 ### keys/1 ###
 
 <pre><code>
-keys(Ref::<a href="#type-memhash">memhash()</a>) -&gt; [term()]
+keys(X1::<a href="#type-memhash">memhash()</a>) -&gt; [{term(), term()}] | {error, enomemhash}
 </code></pre>
 <br />
 
@@ -89,7 +79,7 @@ new() -&gt; <a href="#type-memhash">memhash()</a>
 ### remove/2 ###
 
 <pre><code>
-remove(Ref::<a href="#type-memhash">memhash()</a>, Key::term()) -&gt; ok
+remove(X1::<a href="#type-memhash">memhash()</a>, Key::term()) -&gt; ok
 </code></pre>
 <br />
 
@@ -98,7 +88,7 @@ remove(Ref::<a href="#type-memhash">memhash()</a>, Key::term()) -&gt; ok
 ### rget/2 ###
 
 <pre><code>
-rget(Ref::<a href="#type-memhash">memhash()</a>, Key::term()) -&gt; term()
+rget(Mem::<a href="#type-memhash">memhash()</a>, Key::term()) -&gt; term()
 </code></pre>
 <br />
 
@@ -107,7 +97,7 @@ rget(Ref::<a href="#type-memhash">memhash()</a>, Key::term()) -&gt; term()
 ### set_id/3 ###
 
 <pre><code>
-set_id(Ref::<a href="#type-memhash">memhash()</a>, Key::term(), ID::<a href="memhash_data.md#type-table_id">memhash_data:table_id()</a>) -&gt; ok
+set_id(X1::<a href="#type-memhash">memhash()</a>, Key::term(), ID::<a href="memhash_data.md#type-table_id">memhash_data:table_id()</a>) -&gt; ok
 </code></pre>
 <br />
 
@@ -119,7 +109,7 @@ ID from other part of the memhash (same memhash).
 ### set_val/3 ###
 
 <pre><code>
-set_val(Ref::<a href="#type-memhash">memhash()</a>, Key::term(), Value::term()) -&gt; ok
+set_val(X1::<a href="#type-memhash">memhash()</a>, Key::term(), Value::term()) -&gt; ok
 </code></pre>
 <br />
 
